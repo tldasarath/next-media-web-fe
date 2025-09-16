@@ -3,11 +3,13 @@ import Footer from '@/components/Footer/Footer';
 import AboutSection from '@/components/HomeSection/AboutSection';
 import ClientSections from '@/components/HomeSection/ClientSections';
 import FAQSection from '@/components/HomeSection/FaqSection';
+import FoundersSection from '@/components/HomeSection/FoundersSection';
 import HeroSection from '@/components/HomeSection/HeroSection';
 import ImageTextSection from '@/components/HomeSection/ImageTextSection';
 import ServiceSection from '@/components/HomeSection/ServiceSection';
 import TestimonialSection from '@/components/HomeSection/TestimonialSection';
 import ValuesSection from '@/components/HomeSection/ValuesSection';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 export const metadata = {
   title: 'Home | Next Media',
@@ -36,6 +38,7 @@ import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 export default function Home() {
   return (
     <main className="relative z-20">
+      <SpaceLoader />
       <Navbar />
       <HeroSection />
       <AboutSection />
@@ -45,6 +48,7 @@ export default function Home() {
       <FAQSection />
       <ClientSections />
       <TestimonialSection />
+      <FoundersSection />
       <NewsletterSubscription />
       <Footer />
       <ScrollToTop />

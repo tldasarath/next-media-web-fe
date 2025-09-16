@@ -84,7 +84,11 @@ const Footer = () => {
               </div>
 
               <p className="text-gray-300 text-sm font-normal leading-5 mb-8 max-w-md 2xl:max-w-xs">
-                We create branding solutions that help businesses grow.
+                NextIsNow is not just a tagline, it is our mindset. At Next
+                Media, we bring the future of branding, digital marketing and
+                media into your business today. Founded by Rasheeq and Anas, we
+                help brands across the GCC and India lead with creativity,
+                strategy and impact.{' '}
               </p>
 
               {/* Social Media Icons */}

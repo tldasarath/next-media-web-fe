@@ -1,5 +1,6 @@
 import ContactPage from '@/components/ContactSection/Contact';
 import Footer from '@/components/Footer/Footer';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import PremiumVideoBanner from '@/components/videoBanner/VideoBanner';
@@ -28,6 +29,8 @@ export const metadata = {
 export default function contact() {
   return (
     <div>
+      <SpaceLoader />
+
       <Navbar />
       {/* <PremiumVideoBanner BannerTitle={'Contact'}/> */}
       <div className="py-36">

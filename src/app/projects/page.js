@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer/Footer';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 import { ProjectsPageTitle } from '@/components/PageTitle/ProjectsPageTitle';
 
@@ -10,6 +11,8 @@ import React from 'react';
 export default function project() {
   return (
     <>
+      <SpaceLoader />
+
       <Navbar />
       {/* <PremiumVideoBanner BannerTitle={'Our Projects'} /> */}
       {/* <ProjectsPageTitle /> */}

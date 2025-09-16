@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer/Footer';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import ServicesSection from '@/components/ServiceSection/Service';
@@ -27,6 +28,8 @@ export const metadata = {
 export default function Service() {
   return (
     <div>
+      <SpaceLoader />
+
       <Navbar />
       {/* <PremiumVideoBanner BannerTitle={'Services'}/> */}
       <div className="py-36">

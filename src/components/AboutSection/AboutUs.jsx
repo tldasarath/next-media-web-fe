@@ -84,31 +84,29 @@ export default function AboutUs() {
           {/* Content Section */}
           <div className="w-full lg:w-1/2 py-5 xl:pr-4 md:py-6 flex flex-col justify-start">
             <div className="max-w-2xl mx-auto lg:mx-0">
-              <h3 className="text-2xl font-bold mb-1">About Us</h3>
               <p className="mb-3 text-md xl:text-base">
-                As a{' '}
-                <span className="font-bold ">
-                  leading digital marketing agency in Dubai{' '}
-                </span>
-                , Next Digital believes in the power of creativity and strategy
-                to help businesses grow in today’s competitive market. We
-                specialize in SEO content writing in the UAE, content marketing,
-                and digital storytelling that builds strong connections between
-                brands and their audiences. Our team provides tailored digital
-                solutions, including blog writing, social media marketing in
-                Dubai, Instagram marketing, Facebook ads in the UAE, and
-                branding services such as corporate identity, logo design, and
-                brand development strategies.
+                At <span className="font-bold">Next Media</span>, we believe the
+                strongest brands are built at the point where creativity,
+                strategy and technology come together. We are a marketing agency
+                offering complete solutions in digital marketing, web
+                development, media production and branding across the GCC and
+                India. Our focus is on delivering measurable results, creating
+                unique stories, and building experiences that connect people
+                with brands while helping businesses grow faster and stronger in
+                today’s competitive and digital-first market.
               </p>
               <p className="mb-3 text-md xl:text-base">
-                With expertise in{' '}
-                <span className="font-bold "> web design in Dubai</span>,
-                responsive website development, and business website solutions,
-                we create impactful online experiences. Our videography
-                services, corporate video production, and professional brand
-                storytelling deliver engaging content. We empower brands,
-                strengthen digital presence, and accelerate growth through
-                creativity, innovation, and smart strategies.
+                Founded by Rasheeq and Anas,{' '}
+                <span className="font-bold">Next Media</span> grew from a shared
+                passion for design, marketing and media. Their vision was to
+                create a one-stop agency where businesses thrive with impactful
+                ideas.
+              </p>
+              <p className="mb-3 text-md xl:text-base">
+                From crafting brand identities to running campaigns, creating
+                digital experiences and producing content, we deliver impact.
+                Our integrated approach ensures every project builds trust,
+                captures attention and drives meaningful results for clients.
               </p>
             </div>
           </div>
@@ -163,72 +161,136 @@ export default function AboutUs() {
         {/* CEO Message Section */}
 
         {/* Company Message Section - Without Image */}
-        <div className="flex flex-col items-stretch min-h-[18rem] w-full xl:w-[100%] 2xl:w-[100%] mx-auto hover:shadow-3xl rounded-2xl overflow-hidden transition-all duration-300 bg-gradient-to-br from-blue-50/30 to-purple-50/30 p-8 md:p-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 ">
-              Message from Next Media
+        <div
+          className="flex flex-col items-stretch min-h-[20rem] w-full xl:w-[100%] 2xl:w-[100%] mx-auto 
+  rounded-2xl overflow-hidden transition-all duration-500 
+  bg-gradient-to-br from-blue-50/40 to-purple-50/40 p-8 md:p-12 
+  shadow-lg hover:shadow-2xl relative group"
+        >
+          {/* Glow Border */}
+          <div className="absolute -inset-0.5 bg-gradient-to-br from-blue-50/20 to-purple-50/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+
+          {/* Content */}
+          <div className="max-w-4xl mx-auto text-center relative">
+            <h3
+              className="text-3xl md:text-5xl font-extrabold mb-6 
+       bg-clip-text 
+      tracking-wide"
+            >
+              Message from <span className="">Next Media</span>
             </h3>
 
             <p className="text-lg md:text-xl mb-6 leading-relaxed ">
               At <span className="font-bold ">Next Media</span>, we believe
               creativity and strategy go hand in hand. Our mission is to empower
               businesses with innovative digital solutions that build
-              visibility, spark engagement, and drive growth. From web design
-              and branding to social media and content creation, we craft
+              visibility, spark engagement, and drive growth. From{' '}
+              <span className="font-semibold">web design</span>
+              and <span className="font-semibold">branding</span> to
+              <span className="font-semibold"> social media</span> and
+              <span className="font-semibold"> content creation</span>, we craft
               experiences that connect brands with people in meaningful ways.
             </p>
 
-            <p className="text-lg md:text-xl mb-6 leading-relaxed  italic">
-              We don’t just deliver services—we build partnerships. Every
+            <p className="text-lg md:text-xl mb-6 leading-relaxed italic ">
+              We don’t just deliver services — we build partnerships. Every
               project is an opportunity to tell a story, create an impact, and
               take your business to the next level.
             </p>
 
-            <p className="text-xl md:text-2xl font-semibold mt-6  border-t border-gray-300 pt-4">
+            <p
+              className="text-xl md:text-2xl font-bold mt-6 border-t border-gray-300 pt-4 
+       bg-clip-text "
+            >
               Next Media – Where ideas meet impact.
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-stretch min-h-[20rem] w-full xl:w-[100%] 2xl:w-[100%] mx-auto hover:shadow-3xl rounded-2xl overflow-hidden transition-all duration-300 bg-gradient-to-br from-blue-50/20 to-purple-50/20 p-8 md:p-10">
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-4xl font-bold mb-6 text-center">
-              Message from our CEO
+        <div className="flex flex-col items-stretch min-h-[20rem] w-full xl:w-[100%] 2xl:w-[100%] mx-auto hover:shadow-3xl rounded-2xl overflow-hidden transition-all duration-300 p-6 md:p-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Title */}
+            <h3 className="text-2xl md:text-4xl font-bold mb-10 text-center">
+              Our Founders
             </h3>
 
-            <div className="flex flex-col  lg:flex-row items-center gap-12 mb-6">
-              {/* Changed to square */}
-              <div className="w-96 h-96 mx-auto lg:mx-0 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+            {/* Founder 1 - Image Left, Content Right */}
+            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-12">
+              {/* Image */}
+              <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 <Image
-                  src="/images/team/Rasheeq.jpg" // Replace with actual CEO image path
-                  alt="CEO of Next Digital"
+                  src="/images/team/Rasheeq.jpg"
+                  alt="Mr. Rasheeq Abdurahman"
                   fill
                   className="object-cover"
                 />
               </div>
 
-              <div className="flex-1 text-center lg:text-left">
-                <div className="border-l-0 lg:border-l-4 border-blue-500 lg:pl-6 mb-4">
-                  <p className="text-lg italic mb-4">
-                    "At Next Digital, we believe that great digital experiences
-                    begin with a deep understanding of our clients' vision and a
-                    commitment to excellence in execution."
-                  </p>
-                </div>
-                <div className="mt-4">
-                  <p className="font-semibold text-lg">Rasheeq Abdurahman</p>
-                  <p className="text-sm text-stone-300">
-                    Founder & CEO, Next Digital
-                  </p>
-                </div>
+              {/* Content */}
+              <div className="flex-1 text-left">
+                <h4 className="text-lg md:text-xl font-semibold mb-3">
+                  Mr. Rasheeq Abdurahman
+                </h4>
+                <p className="text-sm md:text-base leading-normal md:leading-relaxed text-left md:text-justify">
+                  Founder of Next Media, Mr. Rasheeq is a passionate graphic
+                  designer and social media marketing specialist with a strong
+                  entrepreneurial spirit. A serial entrepreneur, he also leads
+                  successful ventures including{' '}
+                  <span className="font-semibold">
+                    Invest First, Befirst Enterprises, Befirst HR, and Be Your
+                    Brand
+                  </span>
+                  . With his expertise in branding, marketing, and business
+                  strategy, Rasheeq brings vision and creativity to every
+                  project, driving Next Media’s mission to redefine branding and
+                  digital experiences.
+                </p>
               </div>
             </div>
+
+            {/* Founder 2 - Content Left, Image Right */}
+            <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10 mb-12">
+              {/* Image */}
+              <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+                <Image
+                  src="/images/team/Anas.jpg"
+                  alt="Mr. Mohammed Anas"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 text-left">
+                <h4 className="text-lg md:text-xl font-semibold mb-3">
+                  Mr. Mohammed Anas
+                </h4>
+                <p className="text-sm md:text-base leading-normal md:leading-relaxed text-left md:text-justify">
+                  Co-founder of Next Media, Mr. Mohammed Anas is a seasoned IT
+                  and networking specialist with a deep passion for digital
+                  marketing, media production, and web development. Having
+                  worked with several prestigious companies in Dubai, Anas
+                  combines his technical expertise with creative flair to
+                  deliver innovative solutions. His dedication to blending
+                  technology with creativity plays a key role in shaping Next
+                  Media into a full-fledged creative powerhouse.
+                </p>
+              </div>
+            </div>
+
+            {/* Closing Paragraph */}
+            <p className="text-center text-sm md:text-md mt-8 md:mt-12 max-w-3xl mx-auto leading-normal md:leading-relaxed">
+              Together, their thoughtful planning, entrepreneurial drive, and
+              shared passion for design and media led to the creation of{' '}
+              <span className="font-bold">Next Media</span> — a visionary agency
+              helping brands in the GCC and India move to the next level.
+            </p>
           </div>
         </div>
       </div>
 
       {/* Team Section */}
-      <div className="mt-20 text-center">
+      {/* <div className="mt-20 text-center">
         <h2 className="text-3xl md:text-4xl  font-bold mb-10">Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 max-w-8xl  xl:gap-y-8 2xl:gap-x-36 xl:gap-0 mx-auto">
           {teamMembers.map((member) => (
@@ -249,7 +311,7 @@ export default function AboutUs() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer/Footer';
 import Gallery from '@/components/GallerySection/Gallery';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import SEO from '@/components/SEO/Seo';
@@ -28,6 +29,8 @@ export const metadata = {
 export default function GalleryPage() {
   return (
     <div>
+      <SpaceLoader />
+
       <Navbar />
       {/* <PremiumVideoBanner BannerTitle={'Gallery'}/> */}
       <div className="py-36">

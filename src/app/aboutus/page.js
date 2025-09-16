@@ -1,5 +1,6 @@
 import AboutUs from '@/components/AboutSection/AboutUs';
 import Footer from '@/components/Footer/Footer';
+import SpaceLoader from '@/components/Loader/SpaceLoader';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import PremiumVideoBanner from '@/components/videoBanner/VideoBanner';
@@ -28,6 +29,7 @@ export const metadata = {
 export default function aboutus() {
   return (
     <div>
+      <SpaceLoader />
       <Navbar />
       {/* <PremiumVideoBanner BannerTitle={'About Us'}/> */}
 

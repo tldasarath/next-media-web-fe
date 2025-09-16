@@ -2,10 +2,21 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ImageTextSection = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [isMediumScreen, setIsMediumScreen] = useState(false);
+
+  // Check screen width (md breakpoint = 768px)
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMediumScreen(window.innerWidth >= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const HighlightWord = ({ children }) => (
     <span className="inline-block">
@@ -22,20 +33,24 @@ const ImageTextSection = () => {
     <section className="py-16 container-custom">
       <div className="w-full mx-auto">
         <div className="flex flex-col justify-self-center w-full lg:flex-row items-center gap-0 lg:gap-32">
-          {/* Left side - Falling image */}
+          {/* Left side - Image */}
           <motion.div
-            className="w-full lg:w-3/5 xl:w-2/5 -ml-0 flex justify-center"
-            animate={{
-              x: isHovering ? 120 : 0,
-              y: isHovering ? 140 : [0, -10, 0, 8, 0], // floating effect when idle
-              rotate: isHovering ? 15 : [0, 1, -1, 0], // subtle tilt when idle
-            }}
+            className="w-full lg:w-3/5 xl:w-2/5 flex justify-center"
+            animate={
+              isMediumScreen
+                ? {
+                    x: isHovering ? 120 : 0,
+                    y: isHovering ? 140 : [0, -10, 0, 8, 0], // floating on medium+
+                    rotate: isHovering ? 15 : [0, 1, -1, 0],
+                  }
+                : { x: 0, y: 0, rotate: 0 } // no idle floating on small screens
+            }
             transition={{
               type: isHovering ? 'spring' : 'tween',
               stiffness: isHovering ? 80 : undefined,
               damping: isHovering ? 12 : undefined,
-              duration: isHovering ? undefined : 6, // smooth idle animation
-              repeat: isHovering ? 0 : Infinity, // keep looping idle motion
+              duration: isHovering ? undefined : 6,
+              repeat: isHovering ? 0 : Infinity,
               ease: 'easeInOut',
             }}
             whileHover={{ scale: 1.03 }}
@@ -46,17 +61,17 @@ const ImageTextSection = () => {
             onTouchEnd={() => setIsHovering(false)}
           >
             <motion.div
-              className="relative w-full max-w-md  md:max-w-lg lg:max-w-none xl:max-w-full h-80 sm:h-96 md:h-[450px] lg:h-[400px] 2xl:h-[500px] rounded-3xl overflow-hidden cursor-pointer origin-top-left will-change-transform"
-              animate={{
-                x: isHovering ? 10 : 0, // slide right
-                y: isHovering ? 10 : 0, // slide down
-                rotate: isHovering ? 10 : 0, // tilt to the right
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 80,
-                damping: 12,
-              }}
+              className="relative w-full max-w-md md:max-w-lg lg:max-w-none xl:max-w-full h-80 sm:h-96 md:h-[450px] lg:h-[400px] 2xl:h-[500px] rounded-3xl overflow-hidden cursor-pointer origin-top-left"
+              animate={
+                isMediumScreen
+                  ? {
+                      x: isHovering ? 10 : 0,
+                      y: isHovering ? 10 : 0,
+                      rotate: isHovering ? 10 : 0,
+                    }
+                  : {} // on small screens, only hover/tap works
+              }
+              transition={{ type: 'spring', stiffness: 80, damping: 12 }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 1.02 }}
               onHoverStart={() => setIsHovering(true)}
@@ -73,10 +88,9 @@ const ImageTextSection = () => {
                 priority
               />
 
-              {/* Subtle shadow overlay */}
               <motion.div
                 className="absolute inset-0 pointer-events-none"
-                animate={{ opacity: isHovering ? 0.08 : 0 }}
+                animate={{ opacity: isHovering && isMediumScreen ? 0.08 : 0 }}
                 transition={{ duration: 0.25 }}
               />
             </motion.div>
