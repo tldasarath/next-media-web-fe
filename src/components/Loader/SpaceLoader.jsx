@@ -57,7 +57,7 @@ function SpaceLoader() {
     if (orbitRef.current) {
       gsap.to(orbitRef.current, {
         rotation: 360,
-        duration: 12,
+        duration: 8,
         repeat: -1,
         ease: 'none',
       });
@@ -83,8 +83,6 @@ function SpaceLoader() {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(loadInterval);
-
-          // Animate out before hiding
           gsap.to(containerRef.current, {
             opacity: 0,
             scale: 0.9,
@@ -96,12 +94,11 @@ function SpaceLoader() {
               }
             },
           });
-
           return 100;
         }
-        return prev + 1;
+        return prev + 0.5; // increment half percent
       });
-    }, 30);
+    }, 40); // update every 40ms
 
     return () => clearInterval(loadInterval);
   }, []);
@@ -136,7 +133,9 @@ function SpaceLoader() {
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#35A3E2] border-[0.5px] border-white rounded-full"></div>
       </div>
 
-      <div className="text-white text-sm mt-3 font-mono">{progress}%</div>
+      <div className="text-white text-sm mt-3 font-mono">
+        {Math.round(progress)}%
+      </div>
     </div>
   );
 }
