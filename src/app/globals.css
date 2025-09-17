@@ -127,3 +127,16 @@ body {
     transform: scaleX(0.3) translate(-50%, -50%) rotate(20deg);
   }
 }
+
+@keyframes wave {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.animate-wave {
+  animation: wave 1.8s infinite;
+}

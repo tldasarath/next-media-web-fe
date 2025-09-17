@@ -3,6 +3,21 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+// Add CSS for wave animation directly in a style tag
+const waveAnimationStyle = `
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+    }
+  }
+  .animate-wave {
+    animation: wave 1.8s infinite;
+  }
+`;
+
 const teamMembers = [
   {
     id: 1,
@@ -55,6 +70,27 @@ const teamMembers = [
 ];
 
 export default function AboutUs() {
+  const [loaded, setLoaded] = useState({});
+
+  useEffect(() => {
+    // Inject the wave animation styles when component mounts
+    const styleElement = document.createElement('style');
+    styleElement.textContent = waveAnimationStyle;
+    document.head.appendChild(styleElement);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
+  const handleImageLoad = (src) => {
+    // keep skeleton for 1.5s after image loads (reduced from 3s for better UX)
+    setTimeout(() => {
+      setLoaded((prev) => ({ ...prev, [src]: true }));
+    }, 3000);
+  };
+
   return (
     <section className="container-custom pt-15">
       <div className="text-center mb-12">
@@ -71,11 +107,22 @@ export default function AboutUs() {
             <div className="relative group h-full w-full">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
               <div className="relative h-full w-full">
+                {/* Enhanced Skeleton Loader with Wave Effect */}
+                {!loaded['image1'] && (
+                  <div className="absolute inset-0 overflow-hidden rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-600/50 via-gray-500/50 to-gray-400/50">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/30 to-transparent -skew-x-12 animate-wave"></div>
+                    </div>
+                  </div>
+                )}
                 <Image
                   src="/images/about-us/image1.jpg"
                   alt="About Next Digital"
                   fill
-                  className="rounded-lg shadow-xl object-cover"
+                  className={`rounded-lg shadow-xl object-cover transition-opacity duration-500 ${
+                    loaded['image1'] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoadingComplete={() => handleImageLoad('image1')}
                 />
               </div>
             </div>
@@ -93,7 +140,7 @@ export default function AboutUs() {
                 India. Our focus is on delivering measurable results, creating
                 unique stories, and building experiences that connect people
                 with brands while helping businesses grow faster and stronger in
-                today’s competitive and digital-first market.
+                today's competitive and digital-first market.
               </p>
               <p className="mb-3 text-md xl:text-base">
                 Founded by Rasheeq and Anas,{' '}
@@ -119,11 +166,22 @@ export default function AboutUs() {
             <div className="relative group h-full w-full">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
               <div className="relative h-full w-full">
+                {/* Enhanced Skeleton Loader with Wave Effect */}
+                {!loaded['image2'] && (
+                  <div className="absolute inset-0 overflow-hidden rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-600/50 via-gray-500/50 to-gray-400/50">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/30 to-transparent -skew-x-12 animate-wave"></div>
+                    </div>
+                  </div>
+                )}
                 <Image
                   src="/images/about-us/image2.jpg"
                   alt="Next Digital Mission"
                   fill
-                  className="rounded-lg shadow-xl object-cover"
+                  className={`rounded-lg shadow-xl object-cover transition-opacity duration-500 ${
+                    loaded['image2'] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoadingComplete={() => handleImageLoad('image2')}
                 />
               </div>
             </div>
@@ -193,7 +251,7 @@ export default function AboutUs() {
             </p>
 
             <p className="text-lg md:text-xl mb-6 leading-relaxed italic ">
-              We don’t just deliver services — we build partnerships. Every
+              We don't just deliver services — we build partnerships. Every
               project is an opportunity to tell a story, create an impact, and
               take your business to the next level.
             </p>
@@ -218,11 +276,22 @@ export default function AboutUs() {
             <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-12">
               {/* Image */}
               <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+                {/* Enhanced Skeleton Loader with Wave Effect */}
+                {!loaded['rasheeq'] && (
+                  <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-600/50 via-gray-500/50 to-gray-400/50">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/30 to-transparent -skew-x-12 animate-wave"></div>
+                    </div>
+                  </div>
+                )}
                 <Image
                   src="/images/team/Rasheeq.jpg"
                   alt="Mr. Rasheeq Abdurahman"
                   fill
-                  className="object-cover"
+                  className={`object-cover transition-opacity duration-500 ${
+                    loaded['rasheeq'] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoadingComplete={() => handleImageLoad('rasheeq')}
                 />
               </div>
 
@@ -242,7 +311,7 @@ export default function AboutUs() {
                   </span>
                   . With his expertise in branding, marketing, and business
                   strategy, Rasheeq brings vision and creativity to every
-                  project, driving Next Media’s mission to redefine branding and
+                  project, driving Next Media's mission to redefine branding and
                   digital experiences.
                 </p>
               </div>
@@ -252,11 +321,22 @@ export default function AboutUs() {
             <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10 mb-12">
               {/* Image */}
               <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+                {/* Enhanced Skeleton Loader with Wave Effect */}
+                {!loaded['anas'] && (
+                  <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-600/50 via-gray-500/50 to-gray-400/50">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/30 to-transparent -skew-x-12 animate-wave"></div>
+                    </div>
+                  </div>
+                )}
                 <Image
                   src="/images/team/Anas.jpg"
                   alt="Mr. Mohammed Anas"
                   fill
-                  className="object-cover"
+                  className={`object-cover transition-opacity duration-500 ${
+                    loaded['anas'] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoadingComplete={() => handleImageLoad('anas')}
                 />
               </div>
 
