@@ -298,7 +298,7 @@ export default function AboutUs() {
                   </div>
                 )}
                 <Image
-                  src="/images/team/rasheeq1.jpg"
+                  src="/images/team/Rasheeq1.jpg"
                   alt="Mr. Rasheeq Abdurahman"
                   fill
                   className={` transition-opacity duration-500 ${
