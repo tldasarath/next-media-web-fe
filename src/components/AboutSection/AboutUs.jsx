@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import ProfileCard from '../animations/ProfileCard';
+import ShinyText from '../animations/ShinyText';
 
 // Add CSS for wave animation directly in a style tag
 const waveAnimationStyle = `
@@ -21,51 +23,60 @@ const waveAnimationStyle = `
 const teamMembers = [
   {
     id: 1,
-    name: 'SHAFI',
-    position: 'UI/UX',
-    image: '/images/about-us/person.png',
+    name: 'SHAFIR',
+    position: 'UI/UX Designer',
+    image: '/images/team/shafir.png',
   },
   {
     id: 2,
     name: 'SARFAS',
     position: 'Graphic Designer',
-    image: '/images/about-us/person.png',
+    image: '/images/team/sarfas.png',
   },
   {
     id: 6,
     name: 'DIYA',
     position: 'Graphic Designer',
-    image: '/images/about-us/person.png',
+    image: '/images/team/diya.png',
   },
   {
     id: 3,
     name: 'DASARATH',
-    position: 'Fullstack Developer',
-    image: '/images/about-us/person.png',
+    position: 'Full-Stack Developer',
+    // icon:"/images/team/icons/deve.png",
+
+    image: '/images/team/dasarath.png',
   },
   {
     id: 5,
     name: 'ARJUN',
-    position: 'Fullstack Developer',
-    image: '/images/about-us/person.png',
+    position: 'Full-Stack Developer',
+    image: '/images/team/arjun.png',
   },
   {
     id: 4,
     name: 'NAZMAL',
-    position: 'Digital Marketing',
-    image: '/images/about-us/person.png',
+    position: 'Social Media Expert',
+    image: '/images/team/nazmal.png',
   },
   {
     id: 7,
     name: 'DIYA KRISHNA',
-    position: 'Digital Marketing',
-    image: '/images/about-us/person.png',
+    position: 'Digital Marketing Executive',
+    image: '/images/team/diya-krishna.png',
   },
   {
     id: 8,
     name: 'VISMAYA',
-    position: 'Social Media',
-    image: '/images/about-us/person.png',
+    position: 'Seo Expert',
+    image: '/images/team/vismaya.png',
+  },
+  {
+    id: 9,
+    name: 'Anas',
+    position: 'Video Production',
+    // icon:"/images/team/icons/video.png",
+    image: '/images/team/anas.png',
   },
 ];
 
@@ -88,15 +99,16 @@ export default function AboutUs() {
     // keep skeleton for 1.5s after image loads (reduced from 3s for better UX)
     setTimeout(() => {
       setLoaded((prev) => ({ ...prev, [src]: true }));
-    }, 3000);
+    }, 1500);
   };
 
   return (
     <section className="container-custom pt-15">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-extrabold sm:text-5xl md:pt-6 lg:pt-0">
+        {/* <h2 className="text-3xl font-extrabold sm:text-5xl md:pt-6 lg:pt-0">
           About Us
-        </h2>
+        </h2> */}
+        <ShinyText text="About Us" disabled={false} speed={2.3} />
       </div>
 
       <div className="space-y-12 text-start">
@@ -219,47 +231,48 @@ export default function AboutUs() {
         {/* CEO Message Section */}
 
         {/* Company Message Section - Without Image */}
-        <div
-          className="flex flex-col items-stretch min-h-[20rem] w-full xl:w-[100%] 2xl:w-[100%] mx-auto 
-  rounded-2xl overflow-hidden transition-all duration-500 
-  bg-gradient-to-br from-blue-50/40 to-purple-50/40 p-8 md:p-12 
-  shadow-lg hover:shadow-2xl relative group"
-        >
-          {/* Glow Border */}
-          <div className="absolute -inset-0.5 bg-gradient-to-br from-blue-50/20 to-purple-50/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+        <div className="w-full text-center lg:text-left">
+          {/* Title with gradient */}
+          <h2 className="text-3xl sm:text-3xl text-center md:text-4xl font-extrabold mb-8">
+            Message from Next Media
+          </h2>
 
-          {/* Content */}
-          <div className="max-w-4xl mx-auto text-center relative">
-            <h3
-              className="text-3xl md:text-5xl font-extrabold mb-6 
-       bg-clip-text 
-      tracking-wide"
-            >
-              Message from <span className="">Next Media</span>
-            </h3>
-
-            <p className="text-lg md:text-xl mb-6 leading-relaxed ">
-              At <span className="font-bold ">Next Media</span>, we believe
-              creativity and strategy go hand in hand. Our mission is to empower
-              businesses with innovative digital solutions that build
-              visibility, spark engagement, and drive growth. From{' '}
-              <span className="font-semibold">web design</span>
-              and <span className="font-semibold">branding</span> to
-              <span className="font-semibold"> social media</span> and
-              <span className="font-semibold"> content creation</span>, we craft
-              experiences that connect brands with people in meaningful ways.
+          {/* Unified content section */}
+          <div className="text-lg sm:text-xl md:text-xl leading-relaxed bg-gray-800/80 p-8 rounded-2xl border-l-4 border-purple-500 shadow-lg space-y-6">
+            <p>
+              At{' '}
+              <span className="font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                Next Media
+              </span>
+              , we believe creativity and strategy go hand in hand. Our mission
+              is to empower businesses with innovative digital solutions that
+              build visibility, spark engagement, and drive growth. From{' '}
+              <span className="font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                web design
+              </span>{' '}
+              and{' '}
+              <span className="font-semibold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                branding
+              </span>{' '}
+              to{' '}
+              <span className="font-semibold bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">
+                social media
+              </span>{' '}
+              and{' '}
+              <span className="font-semibold bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">
+                content creation
+              </span>
+              , we craft experiences that connect brands with people in
+              meaningful ways.
             </p>
 
-            <p className="text-lg md:text-xl mb-6 leading-relaxed italic ">
+            <p className="italic">
               We don't just deliver services — we build partnerships. Every
               project is an opportunity to tell a story, create an impact, and
               take your business to the next level.
             </p>
 
-            <p
-              className="text-xl md:text-2xl font-bold mt-6 border-t border-gray-300 pt-4 
-       bg-clip-text "
-            >
+            <p className="text-xl md:text-2xl font-bold text-center mt-4">
               Next Media – Where ideas meet impact.
             </p>
           </div>
@@ -275,7 +288,7 @@ export default function AboutUs() {
             {/* Founder 1 - Image Left, Content Right */}
             <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-12">
               {/* Image */}
-              <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+              <div className="w-56 h-64 md:w-72 md:h-80 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 {/* Enhanced Skeleton Loader with Wave Effect */}
                 {!loaded['rasheeq'] && (
                   <div className="absolute inset-0 overflow-hidden">
@@ -285,10 +298,10 @@ export default function AboutUs() {
                   </div>
                 )}
                 <Image
-                  src="/images/team/Rasheeq.jpg"
+                  src="/images/team/rasheeq1.jpg"
                   alt="Mr. Rasheeq Abdurahman"
                   fill
-                  className={`object-cover transition-opacity duration-500 ${
+                  className={` transition-opacity duration-500 ${
                     loaded['rasheeq'] ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoadingComplete={() => handleImageLoad('rasheeq')}
@@ -320,7 +333,7 @@ export default function AboutUs() {
             {/* Founder 2 - Content Left, Image Right */}
             <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10 mb-12">
               {/* Image */}
-              <div className="w-56 h-64 md:w-60 md:h-72 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+              <div className="w-56 h-64 md:w-72 md:h-80 relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 {/* Enhanced Skeleton Loader with Wave Effect */}
                 {!loaded['anas'] && (
                   <div className="absolute inset-0 overflow-hidden">
@@ -330,10 +343,10 @@ export default function AboutUs() {
                   </div>
                 )}
                 <Image
-                  src="/images/team/Anas.jpg"
+                  src="/images/team/Anas1.jpg"
                   alt="Mr. Mohammed Anas"
                   fill
-                  className={`object-cover transition-opacity duration-500 ${
+                  className={` transition-opacity duration-500 ${
                     loaded['anas'] ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoadingComplete={() => handleImageLoad('anas')}
@@ -370,10 +383,7 @@ export default function AboutUs() {
       </div>
 
       {/* Team Section */}
-      {/* <div className="mt-20 text-center">
-        <h2 className="text-3xl md:text-4xl  font-bold mb-10">Our Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 max-w-8xl  xl:gap-y-8 2xl:gap-x-36 xl:gap-0 mx-auto">
-          {teamMembers.map((member) => (
+      {/* {teamMembers.map((member) => (
             <div key={member.id} className="flex flex-col items-center group">
               <div className="relative h-72 w-64 mx-auto mb-4 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
                 <Image
@@ -389,9 +399,29 @@ export default function AboutUs() {
                 <p>{member.position}</p>
               </div>
             </div>
+          ))} */}
+      {/* Team Section */}
+      <div className="mt-20 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10">Our Team</h2>
+        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 justify-items-center 2xl:grid-cols-4  gap-8   xl:gap-y-8  xl:gap-0 mx-auto">
+          {teamMembers.map((member) => (
+            <ProfileCard
+              key={member.id}
+              name={member.name}
+              title={member.position}
+              handle={member.name.toLowerCase().replace(/\s+/g, '')} // simple handle
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl={member.image}
+              miniAvatarUrl={member.icon}
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={false}
+              onContactClick={() => console.log(`Contact ${member.name}`)}
+            />
           ))}
         </div>
-      </div> */}
+      </div>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import ShinyText from '../animations/ShinyText';
 
 const images = [
   '/images/gallery/ADAMS AURUM [LETTER HEAD].jpg',
@@ -35,9 +36,12 @@ export default function Gallery() {
   return (
     <section className="container-custom pt-15">
       <div className="w-full mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-12">
+        {/* <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-12">
           Our Gallery
-        </h2>
+        </h2> */}
+        <div className="text-center mb-16">
+          <ShinyText text="Our Gallery" disabled={false} speed={2.3} />
+        </div>
 
         {/* Masonry Columns */}
         <div className="columns-1 sm:columns-2 md:columns-4 gap-6">

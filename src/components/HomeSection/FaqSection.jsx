@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const faqs = [
@@ -34,8 +34,15 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
+  // Open first FAQ on page load
+  useEffect(() => {
+    if (faqs.length > 0) {
+      setOpenIndex(0);
+    }
+  }, []);
+
   return (
-    <section className="py-16 container-custom" id="faq">
+    <section className="pt-15 container-custom" id="faq">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10">
           Frequently Asked Questions
@@ -47,8 +54,7 @@ export default function FAQSection() {
               <div
                 key={index}
                 className="bg-black/50 shadow-md rounded-2xl p-4 transition-all duration-300"
-                onMouseEnter={() => setOpenIndex(index)}
-                onMouseLeave={() => setOpenIndex(null)}
+                onMouseEnter={() => setOpenIndex(index)} // only update on hover
               >
                 <div className="w-full flex justify-between items-center text-left">
                   <span className="text-lg font-medium">{faq.question}</span>

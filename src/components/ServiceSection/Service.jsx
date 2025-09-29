@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import ShinyText from '../animations/ShinyText';
 
 export default function ServicesSection() {
   const [loadedImages, setLoadedImages] = useState({});
@@ -64,7 +65,7 @@ export default function ServicesSection() {
       title: 'SOCIAL MEDIA MARKETING',
       description:
         'Boost your online presence with our end-to-end digital marketing solutions. We manage social media, run targeted Google Ads, optimize websites for SEO, and execute data-driven email campaigns — ensuring visibility, engagement, and conversions.',
-      image: '/images/services/social-media-marketing-concept-marketing.jpg',
+      image: '/images/services/social-media.jpg',
       points: [
         'Content Planning & Creation',
         'Account Management',
@@ -90,7 +91,7 @@ export default function ServicesSection() {
   const handleImageLoad = (src) => {
     setTimeout(() => {
       setLoadedImages((prev) => ({ ...prev, [src]: true }));
-    }, 3000);
+    }, 1600);
   };
 
   // Framer motion variants for animation
@@ -111,7 +112,7 @@ export default function ServicesSection() {
     <section className="pt-15 container-custom">
       <div className="w-full">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold sm:text-5xl">Our Services</h2>
+          <ShinyText text="Our Services" disabled={false} speed={2.3} />
         </div>
 
         <div className="space-y-16">

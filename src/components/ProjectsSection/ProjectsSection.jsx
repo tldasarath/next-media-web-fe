@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ProjectsPageTitle } from '../PageTitle/ProjectsPageTitle';
 import Image from 'next/image';
 import PremiumVideoBanner from '../videoBanner/VideoBanner';
+import ShinyText from '../animations/ShinyText';
 
 export const ProjectsSection = () => {
   // Animation variants for the content section
@@ -139,10 +140,8 @@ export const ProjectsSection = () => {
     <section className="  container-custom pt-15 ">
       {/* Hero Banner */}
       <div className="w-full mt-36">
-        <div className="text-center ">
-          <h2 className="text-3xl md:text-5xl font-bold text-center text-white ">
-            Projects
-          </h2>
+        <div className="text-center mb-16">
+          <ShinyText text="Projects" disabled={false} speed={2.3} />
         </div>
 
         {/* Main Content Section */}

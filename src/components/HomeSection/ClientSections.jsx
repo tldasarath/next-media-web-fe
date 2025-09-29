@@ -105,7 +105,7 @@ const ClientSections = () => {
         </div>
 
         {/* Second Carousel (Left to Right) */}
-        <div className="relative w-full overflow-hidden">
+        {/* <div className="relative w-full overflow-hidden">
           <div className="infinite-scroll-reverse flex bg-white/20">
             {duplicatedClients.map((client, index) => (
               <div
@@ -126,7 +126,7 @@ const ClientSections = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
       <style jsx>{`

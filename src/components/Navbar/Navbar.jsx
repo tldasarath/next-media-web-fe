@@ -293,6 +293,15 @@ const Navbar = () => {
                     Projects
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/blogs"
+                    className="block py-2 text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-b hover:from-[#F53A7A] hover:to-[#190CD2] transition-all duration-300"
+                    onClick={toggleSidebar}
+                  >
+                    Blogs
+                  </Link>
+                </li>
               </ul>
             </div>
 

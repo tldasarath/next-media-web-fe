@@ -1,666 +1,396 @@
 'use client';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useState } from 'react';
 import {
-  Shield,
+  ShieldCheck,
   Lock,
-  EyeOff,
-  Mail,
-  Database,
-  UserCheck,
-  ChevronDown,
-  FileText,
-  Cookie,
-  Server,
+  Eye,
   Users,
-  Globe,
-  GanttChartSquare,
+  Cookie,
+  Mail,
+  MapPin,
+  Phone,
+  ChevronDown,
+  ChevronUp,
+  Building,
+  ChartBar,
+  Megaphone,
+  Gavel,
 } from 'lucide-react';
-import { useInView } from 'react-intersection-observer';
-import { useState, useRef, useEffect } from 'react';
-import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import ShinyText from '../animations/ShinyText';
 
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
+export default function PrivacyPolicy() {
+  const [openSections, setOpenSections] = useState({});
 
-const Section = ({ title, icon: Icon, children, index, id }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  return (
-    <motion.section
-      ref={ref}
-      id={id}
-      initial="initial"
-      animate={inView ? 'animate' : 'initial'}
-      variants={fadeIn}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="mb-16 relative"
-    >
-      <div className="absolute -left-4 top-0 h-8 w-8 rounded-full bg-blue-500/10 flex items-center justify-center">
-        <span className="text-blue-500 font-bold text-sm">{index + 1}</span>
-      </div>
-      <div className="flex items-center mb-6">
-        <div className="p-3 bg-blue-500/10 rounded-lg mr-4 backdrop-blur-sm">
-          <Icon className="text-blue-500" size={24} />
-        </div>
-        <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-      </div>
-      <div className="ml-16">{children}</div>
-    </motion.section>
-  );
-};
-
-const FloatingNavigation = () => {
-  const sections = [
-    {
-      id: 'information-collected',
-      title: 'Information We Collect',
-      icon: Database,
-    },
-    { id: 'information-use', title: 'How We Use Information', icon: UserCheck },
-    { id: 'information-sharing', title: 'Information Sharing', icon: EyeOff },
-    { id: 'data-security', title: 'Data Security', icon: Lock },
-    { id: 'your-rights', title: 'Your Rights', icon: Mail },
-    { id: 'cookies', title: 'Cookies & Tracking', icon: Cookie },
-  ];
-
-  const [activeSection, setActiveSection] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -50% 0px' }
-    );
-
-    sections.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    return () => {
-      sections.forEach(({ id }) => {
-        const element = document.getElementById(id);
-        if (element) observer.unobserve(element);
-      });
-    };
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100,
-        behavior: 'smooth',
-      });
-      setIsOpen(false);
-    }
+  const toggleSection = (section) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
   };
 
-  return (
-    <div className="fixed top-24 right-8 z-40">
-      <motion.div
-        className="glass-container rounded-2xl overflow-hidden"
-        animate={{ width: isOpen ? 240 : 52, height: isOpen ? 320 : 52 }}
-        transition={{ type: 'spring', damping: 20 }}
-      >
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full p-3 flex items-center justify-center bg-blue-500/10 hover:bg-blue-500/20 transition-colors"
-        >
-          <GanttChartSquare className="text-blue-500" size={24} />
-        </button>
-
-        {isOpen && (
-          <div className="p-4">
-            <h3 className="text-sm font-semibold text-gray-800 mb-3">
-              Jump to Section
-            </h3>
-            <ul className="space-y-2">
-              {sections.map((section) => (
-                <li key={section.id}>
-                  <button
-                    onClick={() => scrollToSection(section.id)}
-                    className={`flex items-center w-full text-left p-2 rounded-lg transition-all text-sm ${
-                      activeSection === section.id
-                        ? 'bg-blue-500/10 text-blue-600'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/50'
-                    }`}
-                  >
-                    <section.icon size={14} className="mr-2" />
-                    <span>{section.title}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </motion.div>
-    </div>
-  );
-};
-
-const PrivacyPolicy = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.1], [0.2, 0.6]);
-  const backgroundBlur = useTransform(scrollYProgress, [0, 0.1], [4, 12]);
+  const sections = [
+    { id: 'introduction', title: 'Introduction', icon: ShieldCheck },
+    { id: 'information-collected', title: 'Information We Collect', icon: Eye },
+    {
+      id: 'information-use',
+      title: 'How We Use Your Information',
+      icon: Users,
+    },
+    { id: 'data-sharing', title: 'Data Sharing and Disclosure', icon: Users },
+    { id: 'data-security', title: 'Data Security', icon: Lock },
+    { id: 'cookies', title: 'Cookies and Tracking', icon: Cookie },
+    { id: 'your-rights', title: 'Your Rights', icon: ShieldCheck },
+    { id: 'updates', title: 'Updates to This Policy', icon: ShieldCheck },
+    { id: 'contact', title: 'Contact Us', icon: Mail },
+  ];
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen relative py-12 px-4 sm:px-6 lg:px-8"
-    >
-      {/* Animated background elements */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl -z-10"
-        animate={{
-          x: [0, 20, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl -z-10"
-        animate={{
-          x: [0, -20, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
+    <div className="pt-15 container-custom">
+      <div className=" w-4/5 mx-auto px-4">
+        {/* Header with decorative elements */}
+        <div className="text-center mb-12 relative">
+          <div className="absolute -top-4 -left-4 w-20 h-20  rounded-full opacity-50 blur-xl"></div>
+          <div className="absolute -bottom-4 -right-4 w-24 h-24  rounded-full opacity-50 blur-xl"></div>
 
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            className="flex justify-center mb-6"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          ></motion.div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-200 mb-4">
-            Privacy Policy
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Last updated:{' '}
-            {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-          <motion.div
-            className="mt-8"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ChevronDown className="mx-auto text-gray-400" />
-          </motion.div>
-        </motion.div>
+          <ShinyText text="Privacy Policy" disabled={false} speed={2.3} />
 
-        <motion.div
-          style={{
-            opacity: backgroundOpacity,
-            backdropFilter: `blur(${backgroundBlur}px)`,
-          }}
-          className="glass-container rounded-3xl p-8 md:p-12"
-        >
-          <div className="mb-10">
-            <p className="text-gray-600 mb-6">
-              At <span className="font-semibold text-blue-500">NextMedia</span>,
-              we prioritize your privacy and are committed to protecting your
-              personal data. This Privacy Policy outlines how we collect, use,
-              disclose, and safeguard your information when you visit our
-              website.
-            </p>
-            <motion.div
-              className="p-4 bg-blue-500/5 rounded-xl border border-blue-500/10"
-              whileHover={{ scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <p className="text-sm text-blue-700/80">
-                <strong>Quick Summary:</strong> We collect minimal data
-                necessary to provide our services, never sell your personal
-                information, and implement robust security measures to protect
-                your data.
-              </p>
-            </motion.div>
+          <div className="flex items-center justify-center space-x-2 text-lg pt-5  relative z-10">
+            <span>Effective Date: 26 September 2025 </span>
           </div>
+        </div>
 
-          <Section
-            title="Information We Collect"
-            icon={Database}
-            index={0}
-            id="information-collected"
-          >
-            <p className="text-gray-600 mb-4">
-              We collect information that you provide directly to us, as well as
-              automatically collected data when you use our services.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6 mb-4">
-              <div className="bg-white/50 p-4 rounded-xl border border-gray-200/50">
-                <h4 className="font-semibold text-gray-800 mb-2">
-                  Information You Provide
-                </h4>
-                <ul className="list-disc pl-5 text-gray-600 space-y-1 text-sm">
-                  <li>Account registration details</li>
-                  <li>Contact information</li>
-                  <li>Payment and billing data</li>
-                  <li>Communications with us</li>
-                  <li>Survey and feedback responses</li>
-                </ul>
-              </div>
-              <div className="bg-white/50 p-4 rounded-xl border border-gray-200/50">
-                <h4 className="font-semibold text-gray-800 mb-2">
-                  Automatically Collected
-                </h4>
-                <ul className="list-disc pl-5 text-gray-600 space-y-1 text-sm">
-                  <li>Device and browser information</li>
-                  <li>Usage data and analytics</li>
-                  <li>IP address and location data</li>
-                  <li>Cookies and similar technologies</li>
-                  <li>Referral sources</li>
-                </ul>
-              </div>
-            </div>
-          </Section>
-
-          <Section
-            title="How We Use Information"
-            icon={UserCheck}
-            index={1}
-            id="information-use"
-          >
-            <p className="text-gray-600 mb-4">
-              We use your information for the following purposes:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-              {[
-                {
-                  title: 'Service Delivery',
-                  desc: 'Providing and maintaining our services',
-                },
-                {
-                  title: 'Communication',
-                  desc: 'Responding to inquiries and sending updates',
-                },
-                {
-                  title: 'Personalization',
-                  desc: 'Customizing your experience',
-                },
-                {
-                  title: 'Analytics',
-                  desc: 'Improving our products and services',
-                },
-                {
-                  title: 'Security',
-                  desc: 'Protecting against fraudulent activities',
-                },
-                {
-                  title: 'Marketing',
-                  desc: 'Sending promotional communications (with consent)',
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="bg-white/50 p-4 rounded-xl border border-gray-200/50"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-            <p className="text-gray-600">
-              We process your data based on legitimate business interests,
-              contract fulfillment, or your explicit consent where required.
-            </p>
-          </Section>
-
-          <Section
-            title="Information Sharing"
-            icon={EyeOff}
-            index={2}
-            id="information-sharing"
-          >
-            <p className="text-gray-600 mb-4">
-              We may share your information in the following circumstances:
-            </p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left text-gray-600 rounded-lg overflow-hidden">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-100/50">
-                  <tr>
-                    <th className="px-4 py-3">Scenario</th>
-                    <th className="px-4 py-3">Data Shared</th>
-                    <th className="px-4 py-3">Purpose</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      scenario: 'Service Providers',
-                      data: 'Necessary information',
-                      purpose: 'Operational support',
-                    },
-                    {
-                      scenario: 'Legal Requirements',
-                      data: 'As required by law',
-                      purpose: 'Legal compliance',
-                    },
-                    {
-                      scenario: 'Business Transfer',
-                      data: 'User information',
-                      purpose: 'Mergers & acquisitions',
-                    },
-                    {
-                      scenario: 'With Your Consent',
-                      data: 'Specified data',
-                      purpose: 'As directed by you',
-                    },
-                  ].map((item, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-gray-200/50 even:bg-gray-50/30"
-                    >
-                      <td className="px-4 py-3 font-medium">{item.scenario}</td>
-                      <td className="px-4 py-3">{item.data}</td>
-                      <td className="px-4 py-3">{item.purpose}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-gray-600 mt-4">
-              We never sell your personal information to third parties for
-              marketing purposes.
-            </p>
-          </Section>
-
-          <Section
-            title="Data Security"
-            icon={Lock}
-            index={3}
-            id="data-security"
-          >
-            <p className="text-gray-600 mb-4">
-              We implement comprehensive security measures to protect your data:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              {[
-                {
-                  title: 'Encryption',
-                  desc: 'Data encrypted in transit and at rest',
-                },
-                {
-                  title: 'Access Controls',
-                  desc: 'Strict role-based access policies',
-                },
-                {
-                  title: 'Regular Audits',
-                  desc: 'Security assessments and penetration testing',
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="bg-white/50 p-4 rounded-xl border border-gray-200/50 text-center"
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                    <Lock size={20} className="text-blue-500" />
+        <div className="grid lg:grid-cols-3 gap-8 ">
+          {/* Main Content */}
+          <div className="lg:col-span-3 ">
+            <div className=" rounded-2xl bg-black/60 shadow-lg overflow-hidden">
+              {/* Introduction */}
+              <section
+                id="introduction"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <ShieldCheck className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h4 className="font-semibold text-gray-800 mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-            <p className="text-gray-600">
-              While we implement robust security measures, no method of
-              transmission over the Internet is 100% secure. We continuously
-              work to enhance our security practices.
-            </p>
-          </Section>
-
-          <Section title="Your Rights" icon={Mail} index={4} id="your-rights">
-            <p className="text-gray-600 mb-4">
-              Depending on your location, you may have the following rights
-              regarding your personal information:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              {[
-                'Access your personal data',
-                'Correct inaccurate data',
-                'Delete your personal data',
-                'Restrict processing of your data',
-                'Data portability',
-                'Object to processing',
-                'Withdraw consent',
-              ].map((right, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-start p-3 bg-white/50 rounded-xl border border-gray-200/50"
-                  whileHover={{ x: 5 }}
-                >
-                  <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  </div>
-                  <span className="text-gray-600 text-sm">{right}</span>
-                </motion.div>
-              ))}
-            </div>
-            <p className="text-gray-600">
-              To exercise any of these rights, please contact us using the
-              details provided below. We respond to all legitimate requests
-              within one month.
-            </p>
-          </Section>
-
-          <Section
-            title="Cookies & Tracking"
-            icon={Cookie}
-            index={5}
-            id="cookies"
-          >
-            <p className="text-gray-600 mb-4">
-              We use cookies and similar tracking technologies to track activity
-              on our website and store certain information.
-            </p>
-            <div className="rounded-xl border border-gray-200/50 overflow-hidden mb-4">
-              <div className="grid grid-cols-4 bg-gray-100/50 p-3 text-xs font-medium text-gray-700">
-                <div className="col-span-2">Type of Cookie</div>
-                <div>Purpose</div>
-                <div>Duration</div>
-              </div>
-              {[
-                {
-                  type: 'Essential',
-                  purpose: 'Basic website functionality',
-                  duration: 'Session',
-                },
-                {
-                  type: 'Preferences',
-                  purpose: 'Remember your settings',
-                  duration: '1 Year',
-                },
-                {
-                  type: 'Analytics',
-                  purpose: 'Understand website usage',
-                  duration: '2 Years',
-                },
-                {
-                  type: 'Marketing',
-                  purpose: 'Track advertising effectiveness',
-                  duration: '90 Days',
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="grid grid-cols-4 p-3 even:bg-gray-50/30 text-sm"
-                >
-                  <div className="col-span-2 font-medium text-gray-700">
-                    {item.type}
-                  </div>
-                  <div className="text-gray-600">{item.purpose}</div>
-                  <div className="text-gray-600">{item.duration}</div>
+                  <h2 className="text-2xl font-bold ">Introduction</h2>
                 </div>
-              ))}
-            </div>
-            <p className="text-gray-600">
-              You can control cookies through your browser settings. However,
-              disabling cookies may limit your ability to use certain features
-              of our website.
-            </p>
-          </Section>
-
-          <Section
-            title="International Transfers"
-            icon={Globe}
-            index={6}
-            id="international"
-          >
-            <p className="text-gray-600 mb-4">
-              Your information may be transferred to and processed in countries
-              other than your own. We ensure appropriate safeguards are in
-              place:
-            </p>
-            <ul className="list-disc pl-5 text-gray-600 space-y-2 mb-4">
-              <li>Data transferred to countries with adequacy decisions</li>
-              <li>Use of Standard Contractual Clauses where needed</li>
-              <li>Implementation of additional technical security measures</li>
-            </ul>
-          </Section>
-
-          <Section
-            title="Data Retention"
-            icon={Server}
-            index={7}
-            id="retention"
-          >
-            <p className="text-gray-600">
-              We retain your personal information only for as long as necessary
-              to fulfill the purposes for which we collected it, including to
-              satisfy any legal, accounting, or reporting requirements. Our
-              retention periods are based on:
-            </p>
-            <ul className="list-disc pl-5 text-gray-600 space-y-2 mt-4">
-              <li>The amount and sensitivity of the personal data</li>
-              <li>
-                The potential risk of harm from unauthorized use or disclosure
-              </li>
-              <li>The purposes for which we process it</li>
-              <li>Whether we can achieve those purposes through other means</li>
-              <li>Applicable legal requirements</li>
-            </ul>
-          </Section>
-
-          <Section
-            title="Children's Privacy"
-            icon={Users}
-            index={8}
-            id="children"
-          >
-            <p className="text-gray-600">
-              Our website is not intended for children under the age of 16. We
-              do not knowingly collect personal information from children. If
-              you believe we have collected information from a child, please
-              contact us immediately, and we will take steps to remove that
-              information.
-            </p>
-          </Section>
-
-          <Section
-            title="Policy Changes"
-            icon={FileText}
-            index={9}
-            id="changes"
-          >
-            <p className="text-gray-600 mb-4">
-              We may update this privacy policy from time to time. The updated
-              version will be indicated by an updated "Last updated" date and
-              the updated version will be effective as soon as it is accessible.
-            </p>
-            <p className="text-gray-600">
-              We encourage you to review this privacy policy frequently to be
-              informed of how we are protecting your information. If we make
-              material changes, we will notify you either through the email
-              address you have provided us or by placing a prominent notice on
-              our website.
-            </p>
-          </Section>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-            className="mt-16 p-6 bg-blue-500/5 rounded-2xl border border-blue-500/10"
-          >
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Contact Us
-            </h3>
-            <p className="text-gray-600 mb-4">
-              If you have any questions about this Privacy Policy or our privacy
-              practices, please contact our Data Protection Officer:
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-medium text-gray-800 mb-2">Email</h4>
-                <p className="text-blue-500">privacy@nextmedia.example.com</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-800 mb-2">
-                  Postal Address
-                </h4>
-                <p className="text-gray-600">
-                  NextMedia Inc.
-                  <br />
-                  Attn: Data Protection Officer
-                  <br />
-                  123 Privacy Street
-                  <br />
-                  Data Protection City, DP 54321
-                  <br />
-                  United States
+                <p className=" leading-relaxed mb-4">
+                  At <strong>Next Media</strong>, we respect your privacy and
+                  are committed to protecting the personal information you share
+                  with us. This Privacy Policy explains how we collect, use,
+                  store, and safeguard your information when you visit our
+                  website or engage with our services.
                 </p>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
+              </section>
 
-      <FloatingNavigation />
+              {/* Information We Collect */}
+              <section
+                id="information-collected"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Eye className="w-6 h-6 text-green-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold ">
+                      Information We Collect
+                    </h2>
+                  </div>
+                  <button
+                    onClick={() => toggleSection('information-collected')}
+                    className="lg:hidden text-gray-500 hover:text-gray-700"
+                  >
+                    {openSections['information-collected'] ? (
+                      <ChevronUp />
+                    ) : (
+                      <ChevronDown />
+                    )}
+                  </button>
+                </div>
+
+                <div
+                  className={`space-y-6 ${openSections['information-collected'] ? 'block' : 'hidden lg:block'}`}
+                >
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                      <Users className="w-5 h-5 text-blue-600" />
+                      <span>Personal Information</span>
+                    </h3>
+                    <p className="text-gray-700 mb-4">
+                      Name, email address, phone number, company name, and other
+                      details you provide through contact forms, inquiries, or
+                      subscriptions.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {[
+                        'Name and contact information',
+                        'Email address',
+                        'Phone number',
+                        'Company name',
+                        'Subscription details',
+                        'Inquiry information',
+                      ].map((item) => (
+                        <div key={item} className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <span className="text-gray-700">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                      <ChartBar className="w-5 h-5 text-green-600" />
+                      <span>Non-Personal Information</span>
+                    </h3>
+                    <p className="text-gray-700 mb-4">
+                      Browser type, IP address, device information, website
+                      usage, and analytics data.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {[
+                        'Browser type and version',
+                        'IP address',
+                        'Device information',
+                        'Website usage patterns',
+                        'Analytics data',
+                      ].map((item) => (
+                        <div key={item} className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                          <span className="text-gray-700">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* How We Use Your Information */}
+              <section
+                id="information-use"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">
+                    How We Use Your Information
+                  </h2>
+                </div>
+                <p className=" mb-6">Your information may be used to:</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    'Respond to inquiries or requests',
+                    'Provide and improve our services',
+                    'Send updates, newsletters, or promotional communications (with your consent)',
+                    'Analyze website usage to enhance user experience',
+                    'Comply with legal obligations',
+                  ].map((use, index) => (
+                    <div
+                      key={use}
+                      className="flex items-start space-x-3 bg-purple-50 p-4 rounded-lg"
+                    >
+                      <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-sm flex-shrink-0 mt-1">
+                        {index + 1}
+                      </div>
+                      <span className="text-gray-700">{use}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Data Sharing and Disclosure */}
+              <section
+                id="data-sharing"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-red-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">
+                    Data Sharing and Disclosure
+                  </h2>
+                </div>
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6">
+                  <p className="text-red-800 font-semibold">
+                    We do not sell or rent your personal information.
+                  </p>
+                </div>
+                <p className=" mb-6">Your data may be shared with:</p>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4 p-4 bg-red-50 rounded-lg">
+                    <Building className="w-6 h-6 text-red-600" />
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        Trusted Third-Party Service Providers
+                      </p>
+                      <p className="text-gray-700">
+                        To facilitate our services (e.g., email providers,
+                        analytics tools)
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4 p-4 bg-red-50 rounded-lg">
+                    <Gavel className="w-6 h-6 text-red-600" />
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        Legal Authorities
+                      </p>
+                      <p className="text-gray-700">
+                        When required by law or to protect our rights
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Data Security */}
+              <section
+                id="data-security"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Lock className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">Data Security</h2>
+                </div>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Lock className="w-5 h-5 text-green-600" />
+                    <h4 className="text-lg font-semibold text-green-800">
+                      We Protect Your Data
+                    </h4>
+                  </div>
+                  <p className="text-gray-700">
+                    We implement appropriate technical and organizational
+                    measures to protect your data from unauthorized access,
+                    disclosure, alteration, or destruction.
+                  </p>
+                </div>
+              </section>
+
+              {/* Cookies and Tracking */}
+              <section id="cookies" className="p-8 border-b border-gray-100">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Cookie className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">Cookies and Tracking</h2>
+                </div>
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-6">
+                  <p className="text-gray-700 mb-4">
+                    Our website may use cookies, tracking pixels, or similar
+                    technologies to enhance user experience, analyze trends, and
+                    provide personalized content.
+                  </p>
+                  <div className="flex items-center space-x-2 text-orange-700 bg-orange-100 px-3 py-2 rounded-lg">
+                    <Cookie className="w-4 h-4" />
+                    <span className="text-sm font-medium">
+                      You can manage or disable cookies through your browser
+                      settings.
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              {/* Your Rights */}
+              <section
+                id="your-rights"
+                className="p-8 border-b border-gray-100"
+              >
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                    <ShieldCheck className="w-6 h-6 text-indigo-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">Your Rights</h2>
+                </div>
+                <p className=" mb-6">You have the right to:</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    'Access, update, or delete your personal information',
+                    'Opt-out of marketing communications',
+                    'Withdraw consent at any time',
+                  ].map((right, index) => (
+                    <div
+                      key={right}
+                      className="flex items-center space-x-3 bg-indigo-50 p-4 rounded-lg"
+                    >
+                      <div className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <ShieldCheck className="w-3 h-3 text-indigo-600" />
+                      </div>
+                      <span className="text-gray-700">{right}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Updates to This Policy */}
+              <section id="updates" className="p-8 border-b border-gray-100">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <ShieldCheck className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">
+                    Updates to This Policy
+                  </h2>
+                </div>
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                  <p className="text-gray-700">
+                    We may update this Privacy Policy periodically. Any changes
+                    will be posted on this page with an updated "Effective
+                    Date." Please review this policy regularly to stay informed.
+                  </p>
+                </div>
+              </section>
+
+              {/* Contact Information */}
+              <section id="contact" className="p-8">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-pink-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold ">Contact Us</h2>
+                </div>
+                <p className=" mb-6">
+                  To exercise your rights or for privacy-related inquiries,
+                  please contact us at:
+                </p>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Phone</p>
+                        <p className="text-gray-700">+971 58 898 4455</p>
+                        <p className="text-gray-700">+971 52 516 2071</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-green-600" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Email</p>
+                        <p className="text-blue-600">info.nextdms@gmail.com</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+      </div>
     </div>
   );
-};
-
-export default PrivacyPolicy;
+}

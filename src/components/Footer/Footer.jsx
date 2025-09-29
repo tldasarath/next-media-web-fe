@@ -166,6 +166,22 @@ const Footer = () => {
                     Projects
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/faqs"
+                    className="text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-b hover:from-[#F53A7A] hover:to-[#190CD2] transition-all duration-300 text-base font-normal"
+                  >
+                    Faqs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/blogs"
+                    className="text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-b hover:from-[#F53A7A] hover:to-[#190CD2] transition-all duration-300 text-base font-normal"
+                  >
+                    Blogs
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -177,7 +193,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="#"
+                    href="/privacy-policy"
                     className="text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-b hover:from-[#F53A7A] hover:to-[#190CD2] transition-all duration-300 text-base font-normal"
                   >
                     Privacy Policy
@@ -185,7 +201,8 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/terms
+                    "
                     className="text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-b hover:from-[#F53A7A] hover:to-[#190CD2] transition-all duration-300 text-base font-normal"
                   >
                     Term Of Service
