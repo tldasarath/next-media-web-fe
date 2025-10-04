@@ -47,7 +47,7 @@ export default function DigitalMarketing() {
   return (
     <>
       <div className="pt-15 container-custom">
-        <div className=" w-full xl:w-6/7 bg-black/60 shadow-2xl rounded-3xl mx-auto px-2 lg:py-12 sm:px-6 lg:px-8">
+        <div className=" w-full xl:w-6/7 bg-black/60 shadow-2xl rounded-3xl mx-auto px-2 py-4 lg:py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Main Content */}
             <div className="lg:w-2/3">
