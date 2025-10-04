@@ -32,7 +32,10 @@
   --sunpillar-clr-6: var(--sunpillar-6); */
   --card-radius: 30px;
 }
-
+html,
+body {
+  overflow-x: hidden;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

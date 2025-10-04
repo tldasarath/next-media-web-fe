@@ -45,6 +45,31 @@ const ClientSections = () => {
       name: 'AL-ADEED-BUSINESS-GROUP',
       logo: '/images/our-clients/AL-ADEED-BUSINESS-GROUP.png',
     },
+    {
+      id: 13,
+      name: 'Buisness-First',
+      logo: '/images/our-clients/Business-first.png',
+    },
+    {
+      id: 14,
+      name: 'Tmg',
+      logo: '/images/our-clients/TMG.png',
+    },
+    {
+      id: 15,
+      name: 'Cybo-tech',
+      logo: '/images/our-clients/Cybotech01.png',
+    },
+    {
+      id: 16,
+      name: 'Elevate',
+      logo: '/images/our-clients/elevate.png',
+    },
+    {
+      id: 15,
+      name: 'GBW',
+      logo: '/images/our-clients/GBW.jpg',
+    },
   ];
 
   const duplicatedClients = [...clients, ...clients];

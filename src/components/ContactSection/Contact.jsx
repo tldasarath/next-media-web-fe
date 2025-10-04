@@ -410,7 +410,7 @@ export default function ContactPage() {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium">Email</h3>
                       <p className="mt-1  text-base">info.nextdms@gmail.com</p>
-                      <p className="mt-1  text-base">info.nextdms@gmail.com</p>
+                      {/* <p className="mt-1  text-base">info.nextdms@gmail.com</p> */}
                     </div>
                   </div>
                 </div>

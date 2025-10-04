@@ -30,9 +30,9 @@ const ImageTextSection = () => {
   );
 
   return (
-    <section className="py-16 container-custom">
+    <section className="py-16 container-custom overflow-hidden">
       <div className="w-full mx-auto">
-        <div className="flex flex-col justify-self-center w-full lg:flex-row items-center gap-0 lg:gap-32">
+        <div className="flex flex-col justify-self-center w-full lg:flex-row items-center gap-0 lg:gap-32 overflow-hidden">
           {/* Left side - Image */}
           <motion.div
             className="w-full lg:w-3/5 xl:w-2/5 flex justify-center"
