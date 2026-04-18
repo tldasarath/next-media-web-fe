@@ -1,4 +1,6 @@
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
+
 import './globals.css';
 import BackgroundEffects from '@/components/BackgroundEffect/BackgroundEffects';
 import { ToastContainer } from 'react-toastify';
@@ -24,6 +26,19 @@ export default function RootLayout({ children }) {
           {' '}
           {/* This wraps Navbar and main content */}
           {children}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-4BP1MP000H"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-4BP1MP000H');
+            `}
+          </Script>
           <ToastContainer
             position="top-right"
             autoClose={3000}
